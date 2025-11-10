@@ -1,135 +1,70 @@
 "use client"
 
-import { useReducer, useEffect } from "react"
-import { ChainAnimationBuilder } from "@/utils/chain-animation";
+import React, { useEffect } from "react"
+import { useTextAnimation } from "@/utils/text-animation";
 
-interface TitleInfo {
-  text: string;
-}
 
-enum TitleActionTypes {
-  StepNextChar,
-  PopChar
-}
+type TitleType = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
-type TitleReducerAction =
-  | {
-    type: TitleActionTypes.StepNextChar;
-    nextChar: string;
-  }
-  | {
-    type: TitleActionTypes.PopChar;
-  };
+type TitleTypeComProps = { children: React.ReactNode, className: string, type: TitleType };
 
-type TitleAnimationAction = {
-  type: TitleActionTypes,
-  finalText: string;
-}
-
-const createTitleAnimation: ChainAnimationBuilder<TitleInfo, TitleReducerAction, TitleAnimationAction> = ({ action, state, duration, animationTimeouts, next }) => {
-  const interval = duration / action.finalText.length
-  if (action.type == TitleActionTypes.PopChar) {
-    return () => {
-      let titleIndex = action.finalText.length - 1;
-      const typing = setInterval(() => {
-        if (titleIndex >= 0) { // Eliminar caracteres
-          state.dispatcher({
-            type: TitleActionTypes.PopChar,
-          });
-          titleIndex--;
-        }
-        else {
-          clearInterval(typing);
-          if (typeof next != 'undefined') {
-            next();
-          }
-        }
-      }, interval);
-      animationTimeouts.push(typing);
-    }
-  } else if (action.type == TitleActionTypes.StepNextChar) {
-    return () => {
-      let titleIndex = 0;
-      const typing = setInterval(() => {
-        if (titleIndex < action.finalText.length) { // Agregar caracteres
-          state.dispatcher({
-            type: TitleActionTypes.StepNextChar,
-            nextChar: action.finalText[titleIndex]
-          });
-          titleIndex++;
-        }
-        else {
-          clearInterval(typing);
-          if (typeof next != 'undefined') {
-            next();
-          }
-        }
-      }, interval);
-      animationTimeouts.push(typing);
-    }
-  }
-  else {
-    throw new Error(`Invalid action type: ${action.type}`);
+/**
+ * Helper react component. Checks the title type and returns the given JSX tag with children ReactNode within.
+ */
+function TitleTypeComp({ children, type, className }: TitleTypeComProps) {
+  if (type == "h1") {
+    return <h1 className={className}>{children}</h1>
+  } else if (type == "h2") {
+    return <h2 className={className}>{children}</h2>
+  } else if (type == "h3") {
+    return <h3 className={className}>{children}</h3>
+  } else if (type == "h4") {
+    return <h4 className={className}>{children}</h4>
+  } else if (type == "h5") {
+    return <h5 className={className}>{children}</h5>
+  } else if (type == "h6") {
+    return <h6 className={className}>{children}</h6>
   }
 }
 
-const titleReducer = (state: TitleInfo, action: TitleReducerAction) => {
-  const newState = { ...state };
-  if (action.type === TitleActionTypes.StepNextChar) {
-    newState.text += action.nextChar;
-  }
-  else if (action.type === TitleActionTypes.PopChar) {
-    newState.text = newState.text.substring(0, newState.text.length - 1);
-  }
-  else {
-    throw new Error(`Invalid action type: ${action}`)
-  }
-  return newState;
+type TitleProps = {
+  className?: string;
+  children: string;
+  duration: number;
+  type?: TitleType
 }
 
-export default function Title() {
-  const [title, dispatchTitle] = useReducer(titleReducer, { text: "" });
+export default function Title({ className = "", children, duration, type = "h1" }: TitleProps) {
+  const [textState, textAnimationPlayer, textAnimationKiller] = useTextAnimation({ target: children, duration });
 
+  /**
+   * Watches the changes in the animation and
+   * kills the previous animation and plays the
+   * new one.
+   */
   useEffect(() => {
-    const timeouts: NodeJS.Timeout[] = [];
-
-    const typingAnimation = createTitleAnimation({
-      action: {
-        type: TitleActionTypes.StepNextChar,
-        finalText: "Desarrollador de Software"
-      },
-      state: {
-        value: title,
-        dispatcher: dispatchTitle
-      },
-      animationTimeouts: timeouts,
-      duration: 700
-    })
-
-    typingAnimation();
+    textAnimationPlayer();
 
     return () => {
-      timeouts.forEach(t => {
-        clearInterval(t);
-      })
-    };
-  }, []);
+      textAnimationKiller();
+    }
+  }, [textAnimationPlayer]);
 
   return (
-    <div>
-      <h1 className={`
+    <div className={className}>
+      <TitleTypeComp type={type} className={`
           inline-block
-          text-[2.2rem]
+          text-[3rem]
           sm:text-[3.5rem]
           md:text-[4.2rem]
-          text-center
-          font-extrabold
-          `}>
-        <span>{title.text}</span>
+        `}>
+        <span className={`
+          text-inherit    
+        `}>{textState.text}</span>
         <div className={`
           inline-block
-          w-2
-          h-12
+          w-1
+          h-14
           `}>
           <div style={{
             animation: "title-blinking-cursor ease 1s infinite"
@@ -140,7 +75,7 @@ export default function Title() {
             `}>
           </div>
         </div>
-      </h1>
+      </TitleTypeComp>
     </div>
   )
 }

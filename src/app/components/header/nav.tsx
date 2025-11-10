@@ -25,8 +25,6 @@ export default function Nav() {
       flex
       md:block
       justify-end
-
-      py-4
     `}>
       {backdropVisible ? (
         <div className={`

@@ -7,46 +7,63 @@
   --background: #1e293b;
 
   --foreground: #fffe;
-  --foreground-light: #fffa;
+  --foreground-light: #fff5;
 
-  --grastart: #0b1120;
-  --graend: #0f172b;
   --glow: #0ea5e9;
 
   --card-border-color: #e2e8f033;
+
+  --grid-image: repeating-linear-gradient(315deg, var(--foreground-light), transparent 1px, transparent 10px, var(--background) 11px);
+}
+
+body {
+  font-size: 1.3em;
+  color: var(--foreground);
+  background-color: var(--background-heavy);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  letter-spacing: -0.05em;
+  text-wrap: balance;
+  font-weight: 400;
 }
 
 h1 {
-  font-size: 3.85rem;
-  font-weight: bold;
+  font-size: 4rem;
 }
 
 h2 {
   font-size: 2.5rem;
-  font-weight: 600;
 }
 
 h3 {
   font-size: 2rem;
-  font-weight: 400;
 }
 
 h4 {
   font-size: 1.5rem;
-  font-weight: 300;
 }
 
-p {
-  font-size: 1.2rem;
+h5,
+h6 {
+  font-size: 1.3rem;
 }
 
 a {
-  font-size: 1.2rem;
-  transition: all 0.2s;
+  color: var(--glow);
 }
 
 a:hover {
-  color: #fff;
+  text-decoration: underline;
+}
+
+span {
+  color: var(--glow);
 }
 
 /* Animaciones css genericas  */
@@ -81,12 +98,14 @@ a:hover {
   }
 }
 
-/* Presentation card css animations */
+/* Light mode */
 
-@keyframes presentation-card-widening {
-  from {}
+@media(prefers-color-scheme: light) {
+  :root {
+    --background-heavy: #fff;
+    --background: #f1f1f1;
 
-  to {
-    width: 100%;
+    --foreground: #000;
+    --foreground-light: #494949;
   }
 }

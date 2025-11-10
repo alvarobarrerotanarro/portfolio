@@ -1,100 +1,69 @@
+import Link from "next/link";
 import Nav from "@/app/components/header/nav";
 import Title from "@/app/components/header/title";
-import gradientGridImage from "@/app/images/header/grid-gradiant.webp"
-import PresentationCard from "@/app/components/header/presentation-card";
+import Card from "@/app/components/card"
 
 export default function Header() {
+
   return (
     <div className={`
       relative
-      min-h-[800px]
-      flex
-      justify-center
+      bg-[var(--background)]
     `}>
-      <div style={{
-        backgroundImage: `url(${gradientGridImage.src})`,
-      }} className={`
-      absolute
-      inset-0
-      -z-40
-      w-full
-      h-full
-
-      bg-top
-      bg-cover
-      bg-no-repeat
-
-      border-b
-      border-foreground
-
-      opacity-20
-    `}>
-      </div>
-      <div className={`
-        absolute
-        inset-0
-        -z-50
-        w-full
-      `}>
-        <div className={`
+      {/* --- Header Nav Container --- */}
+      <div
+        className={`
             absolute
-            top-[100px]
-            right-[250px]
-            w-[400px]
-            h-[220px]
-            bg-blue-600/35
-            rounded-full
-            blur-[120px]
-          `}></div>
-        <div className={`
-            absolute
-            hidden
-            md:inline-block
-            md:bottom-[50px]
-            md:left-[150px]
-            md:w-[300px]
-            md:h-[600px]
-            bg-pink-600/20
-            blur-[120px]
-            -rotate-45
-            rounded-full
-          `}></div>
-      </div>
-      <header className={`
-        w-[90%]
-        md:w-[700px]
-        flex
-        flex-col
-        items-center
-      `}>
-        <Nav />
-        <div className={`
-          w-full
-          flex
-          flex-col
-          gap-4
-          pt-20
-        `}>
-          <div>
-            <div className={`
-              h-52
-              flex
-              items-center
-              px-4
-            `}>
-              <Title />
-            </div>
-            <div className={`
-                  mt-6
-              `}>
-              <PresentationCard />
-            </div>
-          </div>
-          <div className={`
-              h-12
-            `}></div>
+            -z-50
+            w-full
+            h-full
+          `}
+      >
+        <div
+          className={`
+            flex
+            justify-center
+            py-6
+          `}
+        >
+          <Nav />
         </div>
-      </header >
+      </div>
+      {/* --- Header Content --- */}
+      <div>
+        <Card>
+          <br />
+          <br />
+          <br />
+          <br />
+        </Card>
+
+        <Card className={`
+            flex 
+            flex-col
+          `}>
+          <Title duration={1500} type="h1">Desarrollador de Software Autodicacta.</Title>
+        </Card>
+        <Card>
+          <p>Mi nombre es <Link href="https://github.com/alvarobarrerotanarro" target="_blank">Álvaro</Link> y soy <span>desarrollador por vocacion</span>.</p>
+        </Card>
+
+        <Card className={`
+            flex 
+            flex-col
+          `}>
+          <Title duration={5000} type="h6">{`console.log("Hello World !");`}</Title>
+        </Card>
+        <Card>
+          <p>Experimentado en multitud de <Link href="https://github.com/alvarobarrerotanarro" target="_blank">entornos y lenguajes</Link> de programacion.</p>
+        </Card>
+        <Card>
+          <br />
+          <br />
+          <br />
+          <br />
+        </Card>
+      </div>
     </div>
   )
 }
