@@ -1,32 +1,40 @@
 "use client"
 
-import React, { useState, createContext, ReactNode, useContext, useEffect, useReducer } from "react";
+import React, { createContext, ReactNode, useReducer } from "react";
 
-export const BackdropCtx = createContext<[boolean, (v: boolean | ((p: boolean) => boolean)) => void] | null>(null)
+/**
+ * It consists of a react context in charge of handling 
+ * a useReducer state that stores weather if the current
+ * visibility state matches target visibility. 
+ * 
+ * For instance, if we are looking for the state to be
+ * false, that is, we want to track weather the visibility 
+ * is hidden, we can indicate the target visibility to be false.  
+ * The target target visibility is true by default.
+ * 
+ * May react component may use useCheckBackdropVisibility to gain
+ * access to the context reducer state.
+ */
 
-export default function BackdropProvider({ children }: { children: ReactNode }) {
-  const visibleState = useState(false);
-  return <BackdropCtx.Provider value={visibleState}>{children}</BackdropCtx.Provider>
-}
 
-interface CheckVisibilityInfo {
+type VisibilityInfo = {
   matchesVisibility: boolean;
 }
 
-export function useCheckBackdropVisibility(visibility: boolean) {
-  const backdropVisibleState = useContext(BackdropCtx);
+export const BackdropCtx = createContext<
+  { vinfo: VisibilityInfo, setv: (newValue: boolean) => void } | null
+>(null);
 
-  const reducer = (state: CheckVisibilityInfo, currentVisibility: boolean) => {
-    return (state = ({
-      matchesVisibility: currentVisibility === visibility
-    }));
+/**
+ * The strategy consists of handling the useReducer state logic within the context provider component.
+ */
+export default function BackdropProvider({ target = true, children }: { target?: boolean, children: ReactNode }) {
+  const visibilityReducer = (_: VisibilityInfo, newValue: boolean) => {
+    return ({
+      matchesVisibility: newValue === target
+    });
   }
-  const [match, dispatchMatch] = useReducer(reducer, { matchesVisibility: false });
+  const [vinfo, setv] = useReducer(visibilityReducer, { matchesVisibility: !target });
 
-  useEffect(() => {
-    if (backdropVisibleState)
-      dispatchMatch(backdropVisibleState[0]);
-  }, [backdropVisibleState]);
-
-  return match.matchesVisibility;
+  return <BackdropCtx.Provider value={{ vinfo, setv }}>{children}</BackdropCtx.Provider>
 }

@@ -1,11 +1,11 @@
 import React from 'react'
 
 type CardProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
 }
 
-export default function Card({ children, className = "" }: CardProps) {
+export default function Card({ children = null, className = "" }: CardProps) {
   return (
     <div
       className={`
@@ -40,7 +40,8 @@ export default function Card({ children, className = "" }: CardProps) {
           border-t-[1px]
           border-b-[1px]
           border-slate-500
-          p-4
+          py-2
+          px-4
         `}>
         <div className={className}>
           {children}

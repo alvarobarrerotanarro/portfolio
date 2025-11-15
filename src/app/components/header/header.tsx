@@ -6,46 +6,28 @@ import Card from "@/app/components/card"
 export default function Header() {
 
   return (
-    <div className={`
+    <header className={`
       relative
+      w-full
       bg-[var(--background)]
     `}>
       {/* --- Header Nav Container --- */}
-      <div
-        className={`
-            absolute
-            -z-50
-            w-full
-            h-full
-          `}
-      >
-        <div
-          className={`
-            flex
-            justify-center
-            py-6
-          `}
-        >
-          <Nav />
-        </div>
-      </div>
+      <Nav showThumbAt={758} height={80} />
+
       {/* --- Header Content --- */}
       <div>
-        <Card>
-          <br />
-          <br />
-          <br />
-          <br />
-        </Card>
+        <Card className={`
+          min-h-[79px]    
+        `} />
 
         <Card className={`
             flex 
             flex-col
           `}>
-          <Title duration={1500} type="h1">Desarrollador de Software Autodicacta.</Title>
+          <Title duration={1500} type="h1">Desarrollador de Software Autodidacta.</Title>
         </Card>
         <Card>
-          <p>Mi nombre es <Link href="https://github.com/alvarobarrerotanarro" target="_blank">Álvaro</Link> y soy <span>desarrollador por vocacion</span>.</p>
+          <p>Mi nombre es <Link href="https://github.com/alvarobarrerotanarro" target="_blank">Álvaro</Link>, tengo 18 años y soy <span>desarrollador junior</span>.</p>
         </Card>
 
         <Card className={`
@@ -55,15 +37,10 @@ export default function Header() {
           <Title duration={5000} type="h6">{`console.log("Hello World !");`}</Title>
         </Card>
         <Card>
-          <p>Experimentado en multitud de <Link href="https://github.com/alvarobarrerotanarro" target="_blank">entornos y lenguajes</Link> de programacion.</p>
+          <p>Experimentado en diversos <Link href="https://github.com/alvarobarrerotanarro" target="_blank">entornos y lenguajes</Link> de programacion.</p>
         </Card>
-        <Card>
-          <br />
-          <br />
-          <br />
-          <br />
-        </Card>
+        <Card className="min-h-[100px]"></Card>
       </div>
-    </div>
+    </header>
   )
 }
