@@ -23,26 +23,22 @@ function NavLinks({ broad }: { broad: boolean }) {
   );
 }
 
-type NavProps = {
-  showThumbAt: number;
-  height: number;
-}
-
-export default function Nav({ showThumbAt, height }: NavProps) {
+export default function Nav() {
   const bdropVisibility = useContext(BackdropCtx)
 
   /**
    * Keeps track of the screen width to disble the backdrop.
    */
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (window.innerWidth > showThumbAt) {
+    const resizeHandler = () => {
+      if (window.innerWidth > 758) {
         bdropVisibility?.setv(false);
       }
-    }, 500);
+    }
+    window.addEventListener("resize", resizeHandler);
 
     return () => {
-      clearInterval(interval);
+      window.removeEventListener("resize", resizeHandler);
     };
   }, []);
 
@@ -50,7 +46,7 @@ export default function Nav({ showThumbAt, height }: NavProps) {
    * Alternates the context state, and the button doesn't work if it's hidden.
    */
   const handleThumbClick: MouseEventHandler<HTMLElement> = () => {
-    if (bdropVisibility != null && window.innerWidth < showThumbAt) {
+    if (bdropVisibility != null && window.innerWidth <= 758) {
       bdropVisibility.setv(!bdropVisibility.vinfo.matchesVisibility);
     }
   }
@@ -62,11 +58,10 @@ export default function Nav({ showThumbAt, height }: NavProps) {
   return (
     <nav
       className={`
-      w-full
-      z-50
-      fixed
+        w-full
+        z-50
+        fixed
     `}>
-
       {/* Desktop nav handle */}
       <div className={`
         w-full
@@ -76,11 +71,12 @@ export default function Nav({ showThumbAt, height }: NavProps) {
       `}>
         <Card>
           <div
-            style={{ minHeight: `${height}px` }}
             className={`
-            flex
-            items-center
-          `}>
+              min-h-48
+              lg:min-h-24
+              flex
+              items-center
+            `}>
             <div className={`
               flex-grow   
             `}>
@@ -98,16 +94,18 @@ export default function Nav({ showThumbAt, height }: NavProps) {
         bg-background-heavy
       `}>
 
-
         <Card className={`
-          py-4
+          min-h-16
+          flex
+          flex-col
+          justify-center
         `}>
           <button className={`w-full flex justify-center`}
             onClick={handleThumbClick}
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`
                 transition-transform
-                size-10
+                size-8
                 ${isShowBackdrop() ? "rotate-180" : ""}
               `}>
               <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 5.25 7.5 7.5 7.5-7.5m-15 6 7.5 7.5 7.5-7.5" />

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@alvarobarrerotanarro/react-auto-typing": "^3.0.0",
     "@svgr/webpack": "^8.1.0",
     "next": "15.0.3",
     "octokit": "^4.0.2",
