@@ -42,7 +42,7 @@ export default function Header() {
       {/* --- Header Content --- */}
       <div>
         <Card className={`
-          sm:min-h-16
+          min-h-16
           md:min-h-48
           lg:min-h-24
         `} />
