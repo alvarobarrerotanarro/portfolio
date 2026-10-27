@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { MutableRefObject } from 'react'
 
 type CardProps = {
   children?: React.ReactNode;
   className?: string;
+  ref?: MutableRefObject<any>
 }
 
-export default function Card({ children = null, className = "" }: CardProps) {
+export default function Card({ children = null, className = "", ref }: CardProps) {
   return (
     <div
+      ref={ref}
       className={`
           flex 
           w-full
@@ -40,10 +42,8 @@ export default function Card({ children = null, className = "" }: CardProps) {
           border-t-[1px]
           border-b-[1px]
           border-slate-500
-          py-2
-          px-4
         `}>
-        <div className={className}>
+        <div className={className == "" ? "px-4 py-2" : className}>
           {children}
         </div>
       </div>

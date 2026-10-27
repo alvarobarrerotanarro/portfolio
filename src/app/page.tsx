@@ -1,36 +1,121 @@
+import Image from "next/image";
 import Header from "@/app/components/header/header"
 import Card from "@/app/components/card"
+import SliderCard from "@/app/components/slider-card"
+
+const techImages = [
+  {
+    name: "C++",
+    width: 50,
+    height: 50,
+    alt: "Logo de C++",
+    image: (await import("@/app/images/tech/cpp_logo.webp")).default
+  },
+  {
+    name: "CMake",
+    width: 50,
+    height: 50,
+    alt: "Logo de CMake",
+    image: (await import("@/app/images/tech/cmake_logo.webp")).default
+  },
+  {
+    name: "HTML",
+    width: 50,
+    height: 50,
+    alt: "Logo de HTML",
+    image: (await import("@/app/images/tech/html_logo.webp")).default
+  },
+  {
+    name: "CSS",
+    width: 50,
+    height: 50,
+    alt: "Logo de CSS",
+    image: (await import("@/app/images/tech/css_logo.webp")).default
+  },
+  {
+    name: "JavaScript",
+    width: 50,
+    height: 50,
+    alt: "Logo de JavaScript",
+    image: (await import("@/app/images/tech/js_logo.png")).default
+  },
+  {
+    name: "React",
+    width: 50,
+    height: 50,
+    alt: "Logo de React",
+    image: (await import("@/app/images/tech/react_logo.webp")).default
+  },
+
+
+  {
+    name: "Node.js",
+    width: 50,
+    height: 50,
+    alt: "Logo de Node.js",
+    image: (await import("@/app/images/tech/node_logo.png")).default
+  },
+  {
+    name: "Java",
+    width: 50,
+    height: 50,
+    alt: "Logo de Java",
+    image: (await import("@/app/images/tech/java_logo.png")).default
+  },
+
+
+  {
+    name: "SQL",
+    width: 50,
+    height: 50,
+    alt: "Logo de SQL",
+    image: (await import("@/app/images/tech/sql_logo.png")).default
+  },
+
+
+  {
+    name: "Vim",
+    width: 50,
+    height: 50,
+    alt: "Logo de Vim",
+    image: (await import("@/app/images/tech/vim_logo.webp")).default
+  },
+  {
+    name: "Git",
+    width: 50,
+    height: 50,
+    alt: "Logo de Git",
+    image: (await import("@/app/images/tech/git_logo.png")).default
+  },
+  {
+    name: "Linux",
+    width: 50,
+    height: 50,
+    alt: "Logo de Linux",
+    image: (await import("@/app/images/tech/linux_logo.webp")).default
+  }
+];
 
 export default function Home() {
   return (
     <>
       <Header />
-      <Card className={`
-          flex
-          flex-col
-          gap-6
-        `}>
-        <h2>Asi justifico mis areas de interes.</h2>
-        <p>
-          Inicie mi experiencia como programador de forma autodidacta cuando apenas tenia catorce años trabajando en proyectos personales y experimentando en diferentes entornos.
-        </p>
-        <h3>Siempre he despertado interes por la WEB.</h3>
-        <p>
-          En los inicios de mi carrera commence diseñando paginas web con JavaScript, lo que eventualmente me llevo a presentar interes por el lado del servidor y <span>Node.JS</span>.
-        </p>
-        <h3>Soy proactivo y autodidacta.</h3>
-        <p>
-          Mas recientemente estoy centrado en aprender desarrollo de software para sistemas distribuidos en C/C++.
-        </p>
-      </Card>
+
       <Card>
-        <br />
-        <br />
-      </Card>
-      <Card>
-        <h2>Estas son mis habilidades técnicas.</h2>
+        <h2>Tecnologias que dominio.</h2>
         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum deserunt asperiores beatae dolor ex, delectus inventore doloremque aliquam ipsum consectetur.</p>
       </Card>
+
+      <SliderCard sliderWidth={1500} height={90}>
+        {techImages.map(tech => {
+          return <div className="min-h-full flex items-center select-none">
+            <Image src={tech.image.src} alt={tech.alt} width={tech.width} height={tech.height} />
+          </div>
+        })}
+      </SliderCard>
+
+
+
       <Card>
         <br />
         <br />

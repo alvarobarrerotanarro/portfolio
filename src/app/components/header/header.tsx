@@ -1,10 +1,15 @@
 
 import Link from "next/link";
+import localFont from "next/font/local"
 import { TypingText } from "@alvarobarrerotanarro/react-auto-typing";
 import Nav from "@/app/components/header/nav";
-// import Title from "@/app/components/header/title";
 import Card from "@/app/components/card"
 
+const spaceGrotesk = localFont({
+  src: "../../fonts/SpaceGrotesk.ttf",
+  variable: "--font-space-grotesk",
+  weight: "100 900",
+});
 
 function CustomCursor() {
   return (
@@ -36,21 +41,22 @@ export default function Header() {
       w-full
       bg-[var(--background)]
     `}>
-      {/* --- Header Nav Container --- */}
       <Nav />
-
-      {/* --- Header Content --- */}
       <div>
         <Card className={`
           min-h-16
           md:min-h-48
           lg:min-h-24
+          px-4
+          py-2
         `} />
 
         <Card className={`
           min-h-16
           md:min-h-20
           lg:min-h-32
+          px-4
+          py-2
         `}>
 
           <h1 className={`
@@ -58,38 +64,38 @@ export default function Header() {
             md:text-4xl
             lg:text-6xl
           `}>
-            {/* SEO */}
             <span className="hidden">Soy desarrollador de software autodidacta.</span>
-            {/* Animation */}
-            <TypingText duration={1500} cursor={<CustomCursor />} className={`text-foreground`}>Soy desarrollador de</TypingText>
+            <TypingText duration={1500} cursor={<CustomCursor />} className={`${spaceGrotesk.className} text-foreground`}>Soy desarrollador de</TypingText>
             <br />
-            <TypingText delay={1500} duration={1500} cursor={<CustomCursor />} className={`text-foreground`}>software autodidacta.</TypingText>
+            <TypingText delay={1500} duration={1500} cursor={<CustomCursor />} className={`${spaceGrotesk.className} text-foreground`}>software autodidacta.</TypingText>
           </h1>
         </Card>
 
         <Card>
-          <p>Mi nombre es <Link href="https://github.com/alvarobarrerotanarro" target="_blank">Álvaro</Link>, tengo 18 años y soy <span>desarrollador junior</span>.</p>
+          <p>Mi nombre es <Link href="https://github.com/alvarobarrerotanarro" target="_blank">Álvaro</Link>, tengo 19 años y soy <span>desarrollador</span>.</p>
         </Card>
 
         <Card className={`
           min-h-8
           md:min-h-10
           lg:min-h-14
+          px-4
+          py-2
         `}>
           <h2 className={`
             text-xl   
             md:text-3xl
             lg:text-5xl
           `}>
-            <span className={`hidden`}>{`console.log("Hello World !");`}</span>
-            <TypingText delay={3200} duration={1500} cursor={<CustomCursor />} className={`text-foreground`}>{`console.log("Hello World !");`}</TypingText>
+            <span className={`hidden`}>{`std::cout << "Hello World" << '\\n';`}</span>
+            <TypingText delay={3200} duration={1500} cursor={<CustomCursor />} className={`${spaceGrotesk.className} text-foreground`}>{`std::cout << "Hello World" << '\\n';`}</TypingText>
           </h2>
         </Card>
 
         <Card>
-          <p>Experimentado en diversos <Link href="https://github.com/alvarobarrerotanarro" target="_blank">entornos y lenguajes</Link> de programacion.</p>
+          <p>Con conocimientos en diversos <Link href="https://github.com/alvarobarrerotanarro" target="_blank">entornos y lenguajes</Link> de programacion.</p>
         </Card>
-        <Card className="min-h-12"></Card>
+        <Card className="min-h-12 px-4 py-2"></Card>
       </div>
     </header>
   )
