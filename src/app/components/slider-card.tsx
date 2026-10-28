@@ -25,10 +25,6 @@ const SliderCard: FC<SliderCardProps> = ({
     const [x, setX] = useState(0);
     const [isMountedComponent, setIsMountedComponent] = useState(false);
 
-    if (cardReference.current != null) {
-        cardReference.current.style.height = `${height}px`;
-    }
-
     useEffect(() => {
         if (!isMountedComponent) setIsMountedComponent(true);
 
@@ -56,7 +52,7 @@ const SliderCard: FC<SliderCardProps> = ({
         <Card ref={cardReference} className="text-nowrap overflow-x-hidden">
 
             {children.map((child, i) => {
-                return <div className="h-full inline-block" key={i} ref={(e) => { childrenReferences.current[i] = e }}>{child}</div>
+                return <div style={{padding: `${height}px 0`, animation: "fadein 1s ease-in-out" }} className="h-full inline-block" key={i} ref={(e) => { childrenReferences.current[i] = e }}>{child}</div>
             })}
 
         </Card>

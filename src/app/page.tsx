@@ -23,14 +23,14 @@ const techImages = [
     width: 50,
     height: 50,
     alt: "Logo de HTML",
-    image: (await import("@/app/images/tech/html_logo.webp")).default
+    image: (await import("@/app/images/tech/html_logo.png")).default
   },
   {
     name: "CSS",
     width: 50,
     height: 50,
     alt: "Logo de CSS",
-    image: (await import("@/app/images/tech/css_logo.webp")).default
+    image: (await import("@/app/images/tech/css_logo.png")).default
   },
   {
     name: "JavaScript",
@@ -53,7 +53,7 @@ const techImages = [
     width: 50,
     height: 50,
     alt: "Logo de Node.js",
-    image: (await import("@/app/images/tech/node_logo.png")).default
+    image: (await import("@/app/images/tech/nodejs_logo.png")).default
   },
   {
     name: "Java",
@@ -106,7 +106,7 @@ export default function Home() {
         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum deserunt asperiores beatae dolor ex, delectus inventore doloremque aliquam ipsum consectetur.</p>
       </Card>
 
-      <SliderCard sliderWidth={1500} height={90}>
+      <SliderCard sliderWidth={1500} height={30}>
         {techImages.map(tech => {
           return <div className="min-h-full flex items-center select-none">
             <Image src={tech.image.src} alt={tech.alt} width={tech.width} height={tech.height} />

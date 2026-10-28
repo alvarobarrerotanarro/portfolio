@@ -93,7 +93,7 @@ export default function Header() {
         </Card>
 
         <Card>
-          <p>Con conocimientos en diversos <Link href="https://github.com/alvarobarrerotanarro" target="_blank">entornos y lenguajes</Link> de programacion.</p>
+          <p>Con conocimientos en diferentes <Link href="https://github.com/alvarobarrerotanarro" target="_blank">entornos y lenguajes</Link> de programacion.</p>
         </Card>
         <Card className="min-h-12 px-4 py-2"></Card>
       </div>

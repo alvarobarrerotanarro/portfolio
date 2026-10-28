@@ -19,6 +19,7 @@
 body {
   color: var(--foreground);
   background-color: var(--background-heavy);
+  transition: 0.2s ease-in-out;
 }
 
 h1,

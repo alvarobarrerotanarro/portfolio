@@ -4,6 +4,7 @@ import Link from "next/link";
 import { MouseEventHandler, useContext, useEffect } from "react";
 import { BackdropCtx } from "@/app/contexts/backdrop-ctx";
 import Card from "@/app/components/card"
+import ThemeButton from "@/app/components/header/theme-button";
 
 function NavLinks({ broad }: { broad: boolean }) {
   const ulcls = broad ? (
@@ -11,7 +12,7 @@ function NavLinks({ broad }: { broad: boolean }) {
   ) : (
     "flex flex-col gap-6 nowrap"
   );
-  const licls = "text-foreground";
+  const licls = "text-foreground text-nowrap";
 
   return (
     <ul className={ulcls}>
@@ -78,9 +79,12 @@ export default function Nav() {
               items-center
             `}>
             <div className={`
-              flex-grow   
+              flex
+              justify-between
+              flex-grow
             `}>
               <NavLinks broad={true} />
+              <ThemeButton />
             </div>
           </div>
         </Card>
