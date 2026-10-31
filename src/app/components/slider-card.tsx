@@ -1,14 +1,16 @@
 "use client"
 
 import type { FC, ReactNode } from "react";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import Card from "@/app/components/card"
+import { ClientContext } from "@/app/contexts/client-ctx";
+import { withCoalescedInvoke } from "next/dist/lib/coalesced-function";
 
 type SliderCardProps = {
     speed?: number;
     fps?: number;
     height?: number;
-    sliderWidth?: number;
+    minimalSliderWidth?: number;
     children: ReactNode[];
 }
 
@@ -16,19 +18,20 @@ const SliderCard: FC<SliderCardProps> = ({
     speed = 0.05,
     fps = 60,
     height = 200,
-    sliderWidth = 1000,
+    minimalSliderWidth = 0,
     children
 }) => {
     const childrenReferences = useRef<(HTMLElement | null)[]>([]);
     const cardReference = useRef<HTMLElement>(null);
 
     const [x, setX] = useState(0);
-    const [isMountedComponent, setIsMountedComponent] = useState(false);
+    const clientContext = useContext(ClientContext);
 
     useEffect(() => {
-        if (!isMountedComponent) setIsMountedComponent(true);
+        if (!clientContext.isClient) return;
 
         const interval = setInterval(() => {
+            const sliderWidth = Math.max(window.innerWidth, minimalSliderWidth);
 
             childrenReferences.current.forEach((child, i) => {
                 if (child != null) {
@@ -45,7 +48,7 @@ const SliderCard: FC<SliderCardProps> = ({
         return () => {
             clearInterval(interval);
         }
-    }, [x, speed, fps, isMountedComponent]);
+    }, [x, speed, fps, clientContext.isClient]);
 
     return (
 

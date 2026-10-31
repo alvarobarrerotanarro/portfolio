@@ -12,7 +12,7 @@ import React, { createContext, ReactNode, useReducer } from "react";
  * is hidden, we can indicate the target visibility to be false.  
  * The target target visibility is true by default.
  * 
- * May react component may use useCheckBackdropVisibility to gain
+ * A react component may use useCheckBackdropVisibility to gain
  * access to the context reducer state.
  */
 

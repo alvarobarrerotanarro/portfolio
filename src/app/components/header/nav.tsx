@@ -5,21 +5,42 @@ import { MouseEventHandler, useContext, useEffect } from "react";
 import { BackdropCtx } from "@/app/contexts/backdrop-ctx";
 import Card from "@/app/components/card"
 import ThemeButton from "@/app/components/header/theme-button";
+import { spaceGrotesk } from "@/app/fonts";
+
+const linksData = [
+  {
+    text: "SOBRE MI",
+    href: "/#sobre-mi"
+  },
+  {
+    text: "PROYECTOS",
+    href: "/#proyectos"
+  },
+  {
+    text: "TECNOLOGIAS",
+    href: "/#tecnologias"
+  },
+  {
+    text: "CONTACTO",
+    href: "/#contacto"
+  }
+];
 
 function NavLinks({ broad }: { broad: boolean }) {
   const ulcls = broad ? (
-    "flex flex-col gap-6 lg:flex-row lg:gap-[4%]"
+    "flex flex-col gap-6 lg:flex-row lg:gap-[15%]"
   ) : (
     "flex flex-col gap-6 nowrap"
   );
-  const licls = "text-foreground text-nowrap";
+  const licls = "hover:no-underline text-foreground text-nowrap";
 
   return (
     <ul className={ulcls}>
-      <li><Link href="" className={licls}>Sobre mi</Link></li>
-      <li><Link href="" className={licls}>Habilidades</Link></li>
-      <li><Link href="" className={licls}>Proyectos</Link></li>
-      <li><Link href="" className={licls}>Contacto</Link></li>
+      {linksData.map((data, i) => {
+        return (
+          <li key={i}><Link href={data.href} className={licls}><span className={`${spaceGrotesk.className} text-[--foreground-light] hover:text-[--foreground]`}>{data.text}</span></Link></li>
+        );
+      })}
     </ul >
   );
 }
@@ -119,9 +140,14 @@ export default function Nav() {
           {/* Dialog box */}
           {isShowBackdrop() ? (
             <div className={`
-              py-4
+              flex
+              flex-col
+              gap-8
+              justify-between
+              p-8
             `}>
               <NavLinks broad={false} />
+              <ThemeButton />
             </div>
           ) : null}
 

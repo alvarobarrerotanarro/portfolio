@@ -1,12 +1,17 @@
+"use client"
+
+import { useRef } from 'react';
+import { nextTabIndex } from '@/utils/tabindex';
 import React, { MutableRefObject } from 'react'
 
 type CardProps = {
   children?: React.ReactNode;
   className?: string;
+  tabIndex?: number;
   ref?: MutableRefObject<any>
 }
 
-export default function Card({ children = null, className = "", ref }: CardProps) {
+export default function Card({ children = null, className = "", tabIndex, ref }: CardProps) {
   return (
     <div
       ref={ref}
@@ -42,7 +47,8 @@ export default function Card({ children = null, className = "", ref }: CardProps
           border-t-[1px]
           border-b-[1px]
           border-slate-500
-        `}>
+        `}
+      >
         <div className={className == "" ? "px-4 py-2" : className}>
           {children}
         </div>

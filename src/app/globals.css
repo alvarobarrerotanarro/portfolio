@@ -78,6 +78,18 @@ span {
   }
 }
 
+@keyframes fadein-with-rotation {
+  from {
+    transform: rotateX(90deg);
+    opacity: 0;
+  }
+
+  to {
+    transform: rotateX(0deg);
+    opacity: 1;
+  }
+}
+
 /* Animaciones para componente title */
 
 @keyframes title-blinking-cursor {
@@ -103,7 +115,7 @@ span {
 @media(prefers-color-scheme: light) {
   :root {
     --background-heavy: #fff;
-    --background: #f1f1f1;
+    --background: #e1e1e1;
 
     --foreground: #000;
     --foreground-light: #494949;

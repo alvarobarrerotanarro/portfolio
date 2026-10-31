@@ -1,15 +1,8 @@
 "use client"
 
 import { MouseEventHandler, useContext } from "react";
-import localFont from "next/font/local"
 import { BackdropCtx } from "@/app/contexts/backdrop-ctx";
-
-
-const geistSans = localFont({
-    src: "../fonts/GeistVF.woff",
-    variable: "--font-geist-sans",
-    weight: "100 900",
-});
+import { geistSans, spaceGrotesk } from "@/app/fonts";
 
 export default function BodyWrapper({ children }: { children: React.ReactNode }) {
     const bdropVisibility = useContext(BackdropCtx);
@@ -29,7 +22,7 @@ export default function BodyWrapper({ children }: { children: React.ReactNode })
     return (
         <body
             className={`
-          ${geistSans.className}
+          ${spaceGrotesk.className}
           relative
           bg-gradient-to-b from-grastart to-graend
           text-foreground

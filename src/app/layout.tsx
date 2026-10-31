@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import BackdropProvider from "@/app/contexts/backdrop-ctx";
+import ClientContextProvider from "@/app/contexts/client-ctx";
 import BodyWrapper from "@/app/components/body-wrapper"
 import "./globals.css";
 
@@ -20,7 +21,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <BackdropProvider>
-        <BodyWrapper>{children}</BodyWrapper>
+        <BodyWrapper>
+          <ClientContextProvider>
+            {children}
+          </ClientContextProvider>
+        </BodyWrapper>
       </BackdropProvider>
     </html>
   );
