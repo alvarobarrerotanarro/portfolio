@@ -1,7 +1,6 @@
 "use client"
 
 import { useRef } from 'react';
-import { nextTabIndex } from '@/utils/tabindex';
 import React, { MutableRefObject } from 'react'
 
 type CardProps = {
